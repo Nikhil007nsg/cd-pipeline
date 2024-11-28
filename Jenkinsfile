@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent {
         kubernetes {
             inheritFrom "kube-agent"
@@ -13,10 +13,9 @@ pipeline{
                 cleanWs()
             }
         }
-        stage("checkout from scm"){
-            steps{
+        stage("Checkout from SCM") {
+            steps {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/Nikhil007nsg/cd-pipeline'
-                
             } 
         }
         stage("Update the Deployment Tags") {
@@ -28,19 +27,19 @@ pipeline{
                 """
             }
         }
-         stage("Push the changed deployment file to Git") {
+        stage("Push the Changed Deployment File to Git") {
             steps {
                 sh """
                    git config --global user.name "nikhil007nsg"
                    git config --global user.email "nikhil007nsg@gmail.com"
+                   git pull origin main --rebase || true
                    git add deployment.yaml
-                   git commit -m "Updated Deployment Manifest"
+                   git commit -m "Updated Deployment Manifest" || true
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                  sh "git push https://github.com/Nikhil007nsg/cicd-pipeline main"
+                    sh "git push https://github.com/Nikhil007nsg/cicd-pipeline main"
                 }
             }
         }
-      
     }
 }
