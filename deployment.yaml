@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cicd-pipeline:1.0.0-14
+  name: cd-pipeline
   namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: cicd-pipeline:1.0.0-14
+      app: cd-pipeline
   template:
     metadata:
       labels:
-        app: cicd-pipeline:1.0.0-14
+        app: cd-pipeline
     spec:
       containers:
       - name: cicd
-        image: nikhilsg/cicd-pipeline:1.0.0-14
+        image: nikhilsg/cicd-pipeline:1.0.0-13
         resources:
           requests:
             memory: "300Mi"
