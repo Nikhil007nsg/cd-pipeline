@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: cicd
-        image: nikhilsg/cicd-pipeline:1.0.0-13
+        image: nikhilsg/cicd-pipeline:1.0.0-18
         resources:
           requests:
             memory: "300Mi"
