@@ -5,7 +5,7 @@ pipeline {
         }
     }
     environment {
-        APP_NAME = "cd-pipeline"
+        APP_NAME = "cicd-pipeline"
     }
     stages {
         stage("Cleanup Workspace") {
