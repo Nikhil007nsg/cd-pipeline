@@ -6,6 +6,7 @@ pipeline {
     }
     environment {
         APP_NAME = "cd-pipeline"
+        KUBE_CONFIG = "/home/k5master/.kube/config" 
     }
     stages {
         stage("Cleanup Workspace") {
@@ -38,6 +39,17 @@ pipeline {
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
                     sh "git push https://github.com/Nikhil007nsg/cd-pipeline main"
+                }
+            }
+        }
+        stage("Deploy to Kubernetes") {
+            steps {
+                script {
+                    // Apply both deployment and service files using kubectl with the specified kubeconfig
+                    sh """
+                       kubectl --kubeconfig=${KUBE_CONFIG} apply -f deployment.yaml
+                       kubectl --kubeconfig=${KUBE_CONFIG} apply -f service.yaml
+                    """
                 }
             }
         }
