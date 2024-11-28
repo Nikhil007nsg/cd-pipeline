@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: cicd
-        image: nikhilsg/cicd-pipeline:1.0.0-53
+        image: nikhilsg/cicd-pipeline:${IMAGE_TAG}
         resources:
            memory: "300Mi"
            cpu: "500m"
