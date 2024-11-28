@@ -17,8 +17,13 @@ spec:
       - name: cicd
         image: nikhilsg/cicd-pipeline:1.0.0-13
         resources:
-           memory: "300Mi"
-           cpu: "500m"
+          requests:
+            memory: "300Mi"
+            cpu: "500m"
+          limits:
+            memory: "300Mi"
+            cpu: "500m"
         ports:
          - containerPort: 8080
+
         
