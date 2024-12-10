@@ -8,14 +8,7 @@ pipeline {
         APP_NAME = "cicd-pipeline"
     }
     stages {
-        stage("Prepare Environment") {
-            steps {
-                sh """
-                   apt-get update && apt-get install -y git
-                   git --version
-                """
-            }
-        }
+   
         stage("Cleanup Workspace") {
             steps {
                 cleanWs()
